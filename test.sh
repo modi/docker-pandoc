@@ -11,5 +11,5 @@ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/work -w /work modicn/pandoc \
 	-V geometry:margin=1in \
 	-V indent:true \
 	-V linkcolor:blue \
-	-o example.pdf \
-	example.md
+	-o example/output.pdf \
+	example/input.md
