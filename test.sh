@@ -1,6 +1,9 @@
 #!/bin/sh
 
-docker run --rm -u $(id -u):$(id -g) -v $(pwd):/work -w /work modicn/pandoc \
+docker run --rm -i \
+    -u $(id -u):$(id -g) \
+    -v $(pwd):/work -w /work \
+    modidh/pandoc \
 	--pdf-engine=xelatex \
 	--toc \
 	--toc-depth 2 \
@@ -11,5 +14,5 @@ docker run --rm -u $(id -u):$(id -g) -v $(pwd):/work -w /work modicn/pandoc \
 	-V geometry:margin=1in \
 	-V indent:true \
 	-V linkcolor:blue \
-	-o example/output.pdf \
-	example/input.md
+	-o output.pdf \
+	examples/input.md

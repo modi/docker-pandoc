@@ -2,13 +2,16 @@
 
 [Pandoc](https://pandoc.org/) 是文档转换工具；LaTeX 是排版系统，Pandoc 使用 LaTeX 来输出 PDF；[ctex](https://github.com/CTeX-org/ctex-kit) 为 LaTeX 提供中文支持。
 
-本项目构建了 `modicn/pandoc` Docker 镜像，该镜像以 Pandoc 官方 LaTeX / Alpine 镜像为基础，添加了 ctex 宏集，支持将包含中文的 Markdown 文件转换为 PDF。
+本项目构建了 `modidh/pandoc` Docker 镜像，该镜像以 Pandoc 官方 LaTeX / Alpine 镜像为基础，添加了 ctex 宏集，支持中文的处理。
 
 ## 使用方法
 
 举个例子，如果要把 Markdown 文件 input.md 转换为 PDF 文件 output.pdf：
 
-    docker run --rm -v $PWD:/data modicn/pandoc \
+    docker run --rm -i \
+        -u $(id -u):$(id -g) \
+        -v $(pwd):/work -w /work \
+        modidh/pandoc \
         --pdf-engine=xelatex \
         --toc \
         --toc-depth 2 \
@@ -20,15 +23,13 @@
         -V indent:true \
         -V linkcolor:blue \
         -o output.pdf \
-        input.md
+        examples/input.md
+
+或使用包含上面命令的脚本：`./test.sh`
 
 指定字体：
 
     -V mainfont:noto-sans-sc-regular.otf
-
-## TODO
-
-- 调整段落间距
 
 ## 参考资料
 
